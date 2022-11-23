@@ -1,25 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Container } from "@mui/material";
+import { Routes, Route, Navigate } from "react-router";
+
+//Page components
+import EditRecipe from "./Pages/EditRecipe";
+import Homepage from "./Pages/HomePage";
+import NewRecipe from "./Pages/NewRecipe";
+import RecipeDetails from "./Pages/RecipeDetails";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container>
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/new" element={<NewRecipe />} />
+        <Route path="/:id">
+          <Route index element={<RecipeDetails />} />
+          <Route path="edit" element={<EditRecipe />} />
+        </Route>
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </Container>
   );
 }
 
